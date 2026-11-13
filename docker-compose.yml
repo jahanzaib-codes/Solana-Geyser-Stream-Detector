@@ -1,0 +1,15 @@
+version: '3.8'
+
+services:
+  geyser-detector:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: solana-geyser-detector
+    restart: unless-stopped
+    environment:
+      - PYTHONUNBUFFERED=1
+      - GEYSER_GRPC_ENDPOINT=${GEYSER_GRPC_ENDPOINT:-https://grpc.mainnet.solana.com}
+    volumes:
+      - ./logs:/app/logs
+    command: ["demo"]
